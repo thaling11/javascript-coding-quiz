@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./Assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap"
+      rel="stylesheet"/>
+    <title>Code Quiz</title>
+  </head>
+  <header>
+    <nav>
+      <section id="nav-container">
+        <section><a href="#">View High Scores</a></section>
+    </section>
+</nav>
+</header>
+<body>
+    <main class="welcome">
+        <h1>Coding Quiz!</h1>
+        <p>Welcome to the timed Coding Quiz! You will be given 75 seconds to answer as many questions you can. With every incorrect answer, 15 seconds of time will be deducted. Your final score will be the amount of time remaining at the end of all the questions, or when the time reached 0. Good luck!</p>
+        <section id="button-container">
+            <button id="start-button">Start quiz</button>
+        </section>  
+        
+    </main>
+    <p id="timer-display"></p>
+    <section id="quiz">
+        <aside id="qs"></aside>
+        <aside id="as">
+           <ol id="answer-items">
+            </ol > 
+        </aside>
+    </section>
+
+    <section class ="highscores">
+      <h1>High Scores</h1>
+      <h2>Your high score is: <span class="player-score"></span></h2>
+      <form id="form">
+        <input type="text" id="name-input" placeholder="Name"/>
+        <button id="submit-button">Submit</button>
+     </form>
+      <button id="return-button">Return home</button>
+      <button id="reset-button">Reset scores</button>
+      <p>Highscores <span id="highscores-count">0</span></p>
+      <ol id="highscores-list"> </ol>
+    </section>
+
+   
+    <script src="./Assets/js/script.js"></script>
+  </body>
+</html>

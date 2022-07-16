@@ -1,0 +1,115 @@
+/*Universal*/
+:root {
+  --light-color: rgb(181, 232, 200);
+  --border-color: teal;
+}
+
+* {
+  background-color: rgb(3, 20, 3);
+  color: var(--light-color);
+  font-family: "Roboto Slab", serif;
+  font-size: 20px;
+}
+/*Nav bar with hgihscores*/
+
+#nav-container {
+  display: flex;
+  margin-bottom: 100px;
+}
+
+nav div {
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+/* Header and game explanation*/
+h1 {
+  display: flex;
+  background-color: rgb(56, 59, 56);
+  justify-content: center;
+  margin: 50px 200px;
+  padding: 20px;
+  font-size: 40px;
+  border: 10px ridge var(--border-color);
+}
+
+p {
+  text-align: center;
+  margin: 30px;
+}
+
+#button-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#start-button {
+  width: 120px;
+  height: 40px;
+  margin: 15px;
+  word-wrap: break-word;
+  background-color: var(--border-color);
+  border-radius: 5px;
+  font-size: 20px;
+  border: none;
+}
+
+.answer-buttons,
+#return-button,
+#submit-button,
+#reset-button {
+  width: fit-content;
+  height: 40px;
+  margin: 20px;
+  word-wrap: break-word;
+  background-color: var(--border-color);
+  border-radius: 5px;
+  font-size: 20px;
+  border: none;
+}
+
+#start-button:hover,
+.answer-buttons:hover,
+#submit-button:hover,
+#return-button:hover,
+#reset-button:hover {
+  box-shadow: 0.5px 1px 5px lightgray;
+}
+
+.highscores {
+  display: none;
+}
+
+#name-input {
+  height: 30px;
+  background-color: var(--light-color);
+  color: rgb(65, 64, 64);
+}
+
+#form {
+  display: block;
+  justify-content: center;
+  margin: 0;
+}
+
+@media screen and (max-width: 730px) {
+  h1 {
+    margin: 50px 200px;
+  }
+}
+@media screen and (min-width: 375px) {
+  h1 {
+    margin: 50px 50px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  h1 {
+    margin: 0;
+  }
+}
