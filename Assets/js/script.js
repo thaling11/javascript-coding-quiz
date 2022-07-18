@@ -14,13 +14,12 @@ let highscores = document.querySelector(".highscores");
 let returnbtn = document.querySelector("#return-button");
 let submitButton = document.querySelector("#submit-button");
 let nameInput = document.querySelector("#name-input");
+const yourHighScore = document.querySelector("#your-highscore");
+let highscoresLink = document.querySelector(".viewHighScores");
 let highscoresList = document.querySelector("#highscores-list");
 let highscoresCountSpan = document.querySelector("#highscores-count");
 let resetButton = document.querySelector("#reset-button");
-let hsInput = {
-  playerName: nameInput.value,
-  finalScore: score
-};
+let hsInput = [];
 
 
 //question and answer options
@@ -71,8 +70,6 @@ function restartGame() {
   score = 75;
   timer.textContent = "Time: " + score;
   // countDown.appendChild(timer);
-  //hide quiz on start page
-  // quiz.setAttribute("style", "display: none;");
   highscores.setAttribute("style", "display: none;");
 };
 
@@ -92,15 +89,14 @@ function startTimer() {
 
 //hide start button, display first question
 function questionDisplay() {
+  startTimer();
   if (questionNumber < questions.length) {
-    console.log("hi");
     as.innerHTML = "";
     qs.innerHTML = "";
     currentQuestion = questions[questionNumber];
     console.log(currentQuestion);
     quiz.setAttribute("style", "display: flex;");
-    // qs.setAttribute("style", "display: flex;");
-    // as.setAttribute("style", "display: flex;");
+
     question.textContent = currentQuestion.question;
     for (let index = 0; index < questions.length; index++) {
       let choice = currentQuestion.choices[index];
@@ -115,7 +111,7 @@ function questionDisplay() {
   } else {
     endScore = score;
     score = 0;
-    startTimer();
+    // startTimer();
   }
 }
 
@@ -139,17 +135,13 @@ as.addEventListener("click", function (event) {
 
 //end game score
 function endGame() {
-  // as.setAttribute("style", "display: none;");
-  // qs.setAttribute("style", "display: none;");
   quiz.setAttribute("style", "display: none;");
-
   highscores.setAttribute("style", "display: block; text-align: center;");
-
   let scoreEl = document.querySelector(".player-score")
   let playerScore = endScore;
   scoreEl.textContent = playerScore;
-  
 }
+
 
 //creates highscores list as <li> elements
 function showHighscores() {
@@ -157,15 +149,17 @@ function showHighscores() {
   highscoresCountSpan.textContent = hsInput.length;
 
   for (var i = 0; i < hsInput.length; i++) {
-    var hsList = hsInput[i];
-
+    console.log(hsInput, 157);
+    var hsList = hsInput[i].name;
+    var hsName = hsInput[i].score;
     var li = document.createElement("li");
-    li.textContent = hsList;
+    li.textContent = hsList + " " + " " + hsName;
     li.setAttribute("data-index", i);
 
     highscoresList.appendChild(li);
   }
 }
+
 
 function init() {
   var storedHighscores = JSON.parse(localStorage.getItem("hsInput"));
@@ -182,10 +176,14 @@ function storeHighscores() {
 submitButton.addEventListener("click", function (event) {
   event.preventDefault();
   var nameText = nameInput.value;
+  let scoreEl = document.querySelector(".player-score")
+  let playerScore = scoreEl.textContent;
+  console.log(playerScore);
   if (nameText === "") {
     return;
   }
-  hsInput.push(nameText);
+  hsInput.push({name: nameText, score: playerScore});
+  hsInput.sort((firstItem, secondItem) => secondItem.score - firstItem.score);
   nameInput.value = "";
   showHighscores();
   storeHighscores();
@@ -196,10 +194,7 @@ init();
 //reset highscore board
 resetButton.addEventListener("click", function () {
   localStorage.removeItem("hsInput");
-  hsInput = {
-    playerName: nameInput.value,
-    finalScore: score
-  };
+  hsInput = [];
   highscoresList.innerHTML = "";
   highscoresCountSpan.textContent = hsInput.length;
 });
@@ -207,7 +202,7 @@ resetButton.addEventListener("click", function () {
 //clear page div .welcome cleared -HTML div nav-container and button element
 startButton.addEventListener("click", function () {
   welcome.setAttribute("style", "display: none;");
-  startTimer();
+  // startTimer();
   questionDisplay();
 });
 
@@ -217,3 +212,12 @@ returnbtn.addEventListener("click", function () {
   highscores.setAttribute("style", "visibiity:hidden;");
   restartGame();
 });
+
+highscoresLink.addEventListener("click", function () {
+  welcome.setAttribute("style", "display: none;");
+  highscores.setAttribute("style", "display: block; text-align: center;");
+  quiz.setAttribute("style", "display: none;");
+  nameInput.setAttribute("style", "display: none;");
+  submitButton.setAttribute("style", "display: none;");
+  yourHighScore.setAttribute("style", "display: none;");
+})
